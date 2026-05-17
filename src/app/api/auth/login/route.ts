@@ -1,28 +1,33 @@
 import { NextResponse } from "next/server";
-import { users } from "@/lib/mock-db";
+
+import { userStore } from "@/lib/mock-db";
 
 export async function POST(req: Request) {
 	const { email, password } = await req.json();
 
 	const normalizedEmail = email.toLowerCase();
 
-	const user = users.find(
-		(u) => u.email === normalizedEmail && u.password === password,
-	);
+	const user = userStore.get(normalizedEmail);
 
-	if (!user) {
+	if (!user || user.password !== password) {
 		return NextResponse.json(
-			{ message: "Invalid credentials" },
+			{
+				message: "Invalid credentials",
+			},
 			{ status: 401 },
 		);
 	}
 
-	const response = NextResponse.json({ success: true });
+	const response = NextResponse.json({
+		success: true,
+	});
 
+	// auth cookie
 	response.cookies.set("isLoggedIn", "true", {
 		path: "/",
 	});
 
+	// user cookie
 	response.cookies.set("user", normalizedEmail, {
 		path: "/",
 	});
