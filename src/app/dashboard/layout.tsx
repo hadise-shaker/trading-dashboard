@@ -1,24 +1,20 @@
-import Sidebar from "@/components/Sidebar"
-import Navbar from "@/components/Navbar";
+import Sidebar from "@/components/Sidebar";
+/* import MarketTicker from "@/components/ui/MarketTicker"; */
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
+  const cookieStore = await cookies();
+  if (!cookieStore.get("isLoggedIn")?.value) redirect("/auth");
+
   return (
-    <div className="flex h-screen">
-      
+    <div className="flex h-screen overflow-hidden bg-background">
       <Sidebar />
-
-      <div className="flex-1 flex flex-col">
-        
-        {/* <Navbar /> */}
-
-        <main className="flex-1 p-4 bg-gray-100">
+      <div className="flex flex-col flex-1 overflow-hidden">
+       {/*  <MarketTicker /> */}
+        <main className="flex-1 overflow-y-auto">
           {children}
         </main>
-
       </div>
     </div>
   );
