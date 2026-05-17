@@ -80,14 +80,14 @@ export default function SignupForm({ onSwitch }: Props) {
         fetchCountries();
     }, []);
   return (
-    <div className="text-black w-full max-w-lg mx-auto">
+    <div className=" w-full max-w-lg mx-auto">
         <form onSubmit={handleSubmit}>
 
         <h2 className="text-2xl font-semibold mb-2">
             Create your account
         </h2>
 
-        <p className="text-sm text-zinc-500 mb-6">
+        <p className="text-sm mb-6">
             Join thousands of traders worldwide
         </p>
 
@@ -98,7 +98,7 @@ export default function SignupForm({ onSwitch }: Props) {
 
             {/* Full Name */}
             <div>
-                <label htmlFor="name" className="block text-sm font-medium text-zinc-700 mb-2">
+                <label htmlFor="name" className="block text-sm font-medium mb-2">
                 Full Name
                 </label>
 
@@ -108,7 +108,7 @@ export default function SignupForm({ onSwitch }: Props) {
                     id="name"
                     type="text"
                     placeholder="Enter your full name"
-                    className="input p-2.5 pl-10"
+                    className="input p-2.5! pl-10!"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
@@ -117,7 +117,7 @@ export default function SignupForm({ onSwitch }: Props) {
 
             {/* Email */}
             <div>
-                <label htmlFor="email" className="block text-sm font-medium text-zinc-700 mb-2">
+                <label htmlFor="email" className="block text-sm font-medium mb-2">
                 Email
                 </label>
 
@@ -127,7 +127,7 @@ export default function SignupForm({ onSwitch }: Props) {
                     id="email"
                     type="email"
                     placeholder="Enter your email"
-                    className="input p-2.5 pl-10"
+                    className="input p-2.5! pl-10!"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
@@ -140,7 +140,7 @@ export default function SignupForm({ onSwitch }: Props) {
 
             {/* Password */}
             <div>
-                <label htmlFor="password" className="block text-sm font-medium text-zinc-700 mb-2">
+                <label htmlFor="password" className="block text-sm font-medium mb-2">
                 Password
                 </label>
 
@@ -150,7 +150,7 @@ export default function SignupForm({ onSwitch }: Props) {
                     id="password"
                     type="password"
                     placeholder="Create a password"
-                    className="input p-2.5 pl-10"
+                    className="input p-2.5! pl-10!"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
@@ -159,7 +159,7 @@ export default function SignupForm({ onSwitch }: Props) {
 
             {/* Confirm Password */}
             <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-medium text-zinc-700 mb-2">
+                <label htmlFor="confirmPassword" className="block text-sm font-medium mb-2">
                 Confirm Password
                 </label>
 
@@ -169,7 +169,7 @@ export default function SignupForm({ onSwitch }: Props) {
                     id="confirmPassword"
                     type="password"
                     placeholder="Confirm your password"
-                    className="input p-2.5 pl-10"
+                    className="input p-2.5! pl-10!"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                 />
@@ -179,7 +179,7 @@ export default function SignupForm({ onSwitch }: Props) {
 
             {/* Country - full width */}
             <div>
-                <label htmlFor="country" className="block text-sm font-medium text-zinc-700 mb-2">
+                <label htmlFor="country" className="block text-sm font-medium mb-2">
                     Country
                 </label>
 
@@ -188,7 +188,7 @@ export default function SignupForm({ onSwitch }: Props) {
 
                     <select
                         id="country"
-                        className="input p-2.5 pl-10 appearance-none"
+                        className="input p-2.5! pl-10! appearance-none"
                         value={country}
                         onChange={(e) => setCountry(e.target.value)}
                         disabled={isLoadingCountries}
@@ -213,12 +213,12 @@ export default function SignupForm({ onSwitch }: Props) {
             {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
         </div>
 
-        <p className="text-sm text-zinc-500 mt-6 text-center">
+        <p className="text-sm mt-6 text-center">
             Already have an account?
             <button
             type="button" 
             onClick={onSwitch}
-            className="ml-2 text-blue-600 hover:underline font-medium"
+            className="ml-2 text-[#3B82F6] hover:underline font-medium"
             >
             Log in
             </button>

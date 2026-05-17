@@ -48,11 +48,11 @@ export default function LoginForm({ onSwitch }: Props) {
 	};
 
 	return (
-		<div className="text-black w-full max-w-lg mx-auto">
+		<div className="w-full max-w-lg mx-auto">
 			<form onSubmit={handleSubmit}>
-				<h2 className="text-black text-2xl font-semibold mb-2">Welcome back</h2>
+				<h2 className="text-2xl font-semibold mb-2">Welcome back</h2>
 
-				<p className="text-sm text-zinc-500 mb-6">
+				<p className="text-sm mb-6">
 					Please sign in to your account
 				</p>
 
@@ -60,7 +60,7 @@ export default function LoginForm({ onSwitch }: Props) {
 					<div className="relative">
 						<label
 							htmlFor="email"
-							className="block text-sm font-medium text-zinc-700 mb-2"
+							className="block text-sm font-medium mb-2"
 						>
 							Email
 						</label>
@@ -71,7 +71,7 @@ export default function LoginForm({ onSwitch }: Props) {
 								id="email"
 								type="email"
 								placeholder="Enter your email"
-								className="input p-2.5 pl-10"
+								className="input p-2.5! pl-10!"
 								value={email}
 								onChange={(e) => setEmail(e.target.value)}
 							/>
@@ -81,7 +81,7 @@ export default function LoginForm({ onSwitch }: Props) {
 					<div className="relative">
 						<label
 							htmlFor="password"
-							className="block text-sm font-medium text-zinc-700 mb-2"
+							className="block text-sm font-medium mb-2"
 						>
 							Password
 						</label>
@@ -93,7 +93,7 @@ export default function LoginForm({ onSwitch }: Props) {
 								id="password"
 								type={showPassword ? "text" : "password"}
 								placeholder="Enter your password"
-								className="input p-2.5 pl-10 pr-10"
+								className="input p-2.5! pl-10! pr-10!"
 								value={password}
 								onChange={(e) => setPassword(e.target.value)}
 							/>
@@ -101,7 +101,7 @@ export default function LoginForm({ onSwitch }: Props) {
 							<button
 								type="button"
 								onClick={() => setShowPassword((prev) => !prev)}
-								className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-700"
+								className="absolute right-3 top-1/2 -translate-y-1/2 text-[#4A5168]"
 							>
 								{showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
 							</button>
@@ -114,7 +114,7 @@ export default function LoginForm({ onSwitch }: Props) {
 							Remember me
 						</label>
 
-						<button className="text-blue-600 hover:underline">
+						<button className="text-[#3B82F6] hover:underline">
 							Forgot password?
 						</button>
 					</div>
@@ -126,29 +126,29 @@ export default function LoginForm({ onSwitch }: Props) {
 				</div>
 
 				<div className="flex items-center gap-3 my-6">
-					<div className="flex-1 h-px bg-zinc-200" />
-					<span className="text-xs text-zinc-400">or continue with</span>
-					<div className="flex-1 h-px bg-zinc-200" />
+					<div className="flex-1 h-px bg-[#1E2230]" />
+					<span className="text-xs text-[#4A5168]">or continue with</span>
+					<div className="flex-1 h-px bg-[#1E2230]" />
 				</div>
 
 				<div className="flex gap-3">
-					<button className="social-btn">
+					<button className="social-btn hover:bg-gray-100 font-semibold">
 						<img src="/icons/google.svg" className="w-4 h-4" />
 						Google
 					</button>
 
-					<button className="social-btn">
+					<button className="social-btn hover:bg-gray-100 font-semibold">
 						<img src="/icons/apple.svg" className="w-4 h-4" />
 						Apple
 					</button>
 				</div>
 
-				<p className="text-sm text-zinc-500 mt-6 text-center">
+				<p className="text-sm mt-6 text-center">
 					Don't have an account?
 					<button
 						type="button" 
 						onClick={onSwitch}
-						className="ml-2 text-blue-600 hover:underline font-medium"
+						className="ml-2 text-[#3B82F6] hover:underline font-medium"
 					>
 						Sign up
 					</button>
