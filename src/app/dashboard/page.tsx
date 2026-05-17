@@ -17,7 +17,7 @@ export default async function DashboardPage() {
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
           <MarketOverview />
           <RecentPositions />
-          </div>
+        </div>
       </div>
     </div>
   );
