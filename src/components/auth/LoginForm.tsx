@@ -59,7 +59,7 @@ export default function LoginForm({ onSwitch }: Props) {
 				<div className="space-y-6">
 					<div className="relative">
 						<label
-							htmlFor="email"
+							htmlFor="login-email"
 							className="block text-sm font-medium mb-2"
 						>
 							Email
@@ -68,7 +68,7 @@ export default function LoginForm({ onSwitch }: Props) {
 						<div className="relative">
 							<Mail className="input-icon" size={20} />
 							<input
-								id="email"
+								id="login-email"
 								type="email"
 								placeholder="Enter your email"
 								className="input p-2.5! pl-10!"
@@ -80,7 +80,7 @@ export default function LoginForm({ onSwitch }: Props) {
 
 					<div className="relative">
 						<label
-							htmlFor="password"
+							htmlFor="login-password"
 							className="block text-sm font-medium mb-2"
 						>
 							Password
@@ -90,7 +90,7 @@ export default function LoginForm({ onSwitch }: Props) {
 							<LockKeyhole className="input-icon" size={20} />
 
 							<input
-								id="password"
+								id="login-password"
 								type={showPassword ? "text" : "password"}
 								placeholder="Enter your password"
 								className="input p-2.5! pl-10! pr-10!"
@@ -114,7 +114,7 @@ export default function LoginForm({ onSwitch }: Props) {
 							Remember me
 						</label>
 
-						<button className="text-[#3B82F6] hover:underline">
+						<button type="button" className="text-[#3B82F6] hover:underline">
 							Forgot password?
 						</button>
 					</div>
@@ -132,12 +132,12 @@ export default function LoginForm({ onSwitch }: Props) {
 				</div>
 
 				<div className="flex gap-3">
-					<button className="social-btn hover:bg-gray-100 font-semibold">
+					<button type="button" className="social-btn hover:bg-gray-100 font-semibold">
 						<img src="/icons/google.svg" className="w-4 h-4" />
 						Google
 					</button>
 
-					<button className="social-btn hover:bg-gray-100 font-semibold">
+					<button type="button" className="social-btn hover:bg-gray-100 font-semibold">
 						<img src="/icons/apple.svg" className="w-4 h-4" />
 						Apple
 					</button>

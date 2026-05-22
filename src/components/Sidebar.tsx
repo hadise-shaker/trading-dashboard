@@ -35,8 +35,8 @@ export default function Sidebar() {
       <div className="flex items-center justify-between shrink-0 h-16 px-3 border-b border-(--border)">
         {open ? (
           <div className="flex items-center">
-            <span className="text-xl font-extrabold tracking-tight text-foreground">HF</span>
-            <span className="text-xl font-extrabold tracking-tight text-red-500">M</span>
+            <span className="text-xl font-extrabold tracking-tight text-foreground">TRAD</span>
+            <span className="text-xl font-extrabold tracking-tight text-red-500">E</span>
           </div>
         ) : (
           <div className="flex-1 flex justify-center">
