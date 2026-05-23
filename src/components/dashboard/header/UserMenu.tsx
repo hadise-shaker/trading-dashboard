@@ -26,10 +26,10 @@ export default function UserMenu({ userName }: Props) {
       </span>
       <button
         onClick={handleLogout}
-        className="ml-1 flex items-center border-none bg-transparent p-0 transition-colors text-(--muted)"
+        className="ml-1 flex items-center border-none bg-transparent p-0 transition-colors text-foreground"
         title="Logout"
       >
-        <LogOut size={14} />
+        <LogOut size={16} />
       </button>
     </div>
   );

@@ -66,7 +66,7 @@ export default function Sidebar() {
                 ${open ? "gap-2.5 px-3 py-2.5" : "justify-center py-2.5"}
                 ${active
                   ? "text-(--accent) bg-(--accent-dim) border-(--accent)"
-                  : "text-(--text) bg-transparent border-transparent"
+                  : "text-(--muted) bg-transparent border-transparent"
                 }
               `}
             >
