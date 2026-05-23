@@ -1,56 +1,103 @@
 "use client";
+
 import { useEffect, useRef } from "react";
-import { createChart, LineSeries, IChartApi } from "lightweight-charts";
+import { createChart, AreaSeries, IChartApi, Time } from "lightweight-charts";
+import { useTheme } from "@/context/ThemeContext";
 
-type Props = { symbol: string; interval: string; limit: number };
+type ChartPoint = { time: number; close: number };
+type Props = { data: ChartPoint[] };
 
-export default function MarketChart({ symbol, interval, limit }: Props) {
-  const chartRef  = useRef<HTMLDivElement>(null);
-  const chartInst = useRef<IChartApi | null>(null);
-  const seriesRef = useRef<ReturnType<IChartApi["addSeries"]> | null>(null);
+export default function MarketChart({ data }: Props) {
+	const chartRef = useRef<HTMLDivElement>(null);
+	const chartInst = useRef<IChartApi | null>(null);
+	const seriesRef = useRef<ReturnType<IChartApi["addSeries"]> | null>(null);
+	const { isDark } = useTheme();
 
-  useEffect(() => {
-    if (!chartRef.current) return;
+	const colors = isDark
+		? {
+				grid: "#1E2230",
+				border: "#1E2230",
+				text: "#4A5168",
+				line: "#3B82F6",
+				cross: "#3B82F6",
+			}
+		: {
+				grid: "#E4E7EF",
+				border: "#E4E7EF",
+				text: "#9AA0B2",
+				line: "#2563EB",
+				cross: "#2563EB",
+			};
 
-    const chart = createChart(chartRef.current, {
-      height: 280,
-      layout: { background: { color: "transparent" }, textColor: "#4A5168" },
-      grid:   { vertLines: { color: "#1E2230" }, horzLines: { color: "#1E2230" } },
-      crosshair: { vertLine: { color: "#3B82F6", width: 1, style: 2 }, horzLine: { color: "#3B82F6", width: 1, style: 2 } },
-      rightPriceScale: { borderColor: "#1E2230" },
-      timeScale: { borderColor: "#1E2230", timeVisible: true },
-    });
+	useEffect(() => {
+		if (!chartRef.current) return;
 
-    const series = chart.addSeries(LineSeries, {
-      color: "#3B82F6",
-      lineWidth: 2,
-    } as Parameters<IChartApi["addSeries"]>[1]);
+		const chart = createChart(chartRef.current, {
+			height: 280,
+			layout: {
+				background: { color: "transparent" },
+				textColor: colors.text,
+			},
+			grid: {
+				vertLines: { color: colors.grid },
+				horzLines: { color: colors.grid },
+			},
+			crosshair: {
+				vertLine: { color: colors.cross, width: 1, style: 2 },
+				horzLine: { color: colors.cross, width: 1, style: 2 },
+			},
+			rightPriceScale: { borderColor: colors.border },
+			timeScale: { borderColor: colors.border, timeVisible: true },
+		});
 
-    chartInst.current = chart;
-    seriesRef.current = series;
+		const series = chart.addSeries(AreaSeries, {
+			lineColor: colors.line,
+			lineWidth: 2,
+			topColor: isDark ? "rgba(59,130,246,0.45)" : "rgba(37,99,235,0.30)",
+			bottomColor: isDark ? "rgba(59,130,246,0.05)" : "rgba(37,99,235,0.05)",
+		} as Parameters<IChartApi["addSeries"]>[1]);
 
-    const observer = new ResizeObserver(() => {
-      if (chartRef.current) chart.applyOptions({ width: chartRef.current.clientWidth });
-    });
-    observer.observe(chartRef.current);
+		chartInst.current = chart;
+		seriesRef.current = series;
+		if (data.length) {
+			const formatted = data.map((d) => ({
+				time: Math.floor(d.time / 1000) as Time,
+				value: d.close,
+			}));
 
-    return () => { observer.disconnect(); chart.remove(); };
-  }, []);
+			series.setData(formatted);
 
-  useEffect(() => {
-    if (!seriesRef.current) return;
+			chart.timeScale().fitContent();
+		}
+		const observer = new ResizeObserver(() => {
+			if (chartRef.current) {
+				chart.applyOptions({ width: chartRef.current.clientWidth });
+			}
+		});
+		observer.observe(chartRef.current);
 
-    fetch(`/api/market/chart?symbol=${symbol}&interval=${interval}&limit=${limit}`)
-      .then((r) => r.json())
-      .then((data) => {
-        const formatted = data.map((d: { time: number; close: number }) => ({
-          time: Math.floor(d.time / 1000) as unknown as import("lightweight-charts").Time,
-          value: d.close,
-        }));
-        seriesRef.current!.setData(formatted);
-        chartInst.current?.timeScale().fitContent();
-      });
-  }, [symbol, interval, limit]);
+		return () => {
+			observer.disconnect();
+			chart.remove();
+			chartInst.current = null;
+			seriesRef.current = null;
+		};
+	}, [isDark]);
 
-  return <div ref={chartRef} className="w-full" />;
+	useEffect(() => {
+		if (!seriesRef.current || !data?.length) {
+			return;
+		}
+
+		const formatted = data.map((d) => ({
+			time: Math.floor(d.time / 1000) as Time,
+			value: d.close,
+		}));
+
+		seriesRef.current.setData(formatted);
+
+		chartInst.current?.timeScale().fitContent();
+	}, [data]);
+
+	return <div ref={chartRef} className="w-full" />;
 }
