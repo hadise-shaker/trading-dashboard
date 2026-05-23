@@ -1,5 +1,5 @@
 import Sidebar from "@/components/Sidebar";
-/* import MarketTicker from "@/components/ui/MarketTicker"; */
+import MarketTicker from "@/components/dashboard/market/MarketTicker";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -11,7 +11,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
     <div className="flex h-screen overflow-hidden bg-background">
       <Sidebar />
       <div className="flex flex-col flex-1 overflow-hidden">
-       {/*  <MarketTicker /> */}
+        <MarketTicker />
         <main className="flex-1 overflow-y-auto">
           {children}
         </main>
